@@ -28,7 +28,7 @@ public class EditDashboard {
 		9. Click on Done and  Click on save in the popup window displayed.
 		10. Verify the Description.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		WebDriverManager.chromedriver().setup();
 
 		ChromeOptions options = new ChromeOptions();
@@ -54,16 +54,20 @@ public class EditDashboard {
 		dashboardsButton.click();
 		
 		driver.findElement(By.xpath("//input[@placeholder='Search recent dashboards...']")).sendKeys("Salesforce Automation by Irshad");
+		Thread.sleep(5000);
 		driver.findElement(By.xpath("//a[@title='Salesforce Automation by Irshad']/ancestor::tr/td[6]//span/div")).click();
 		driver.findElement(By.xpath("//div[contains(@class,'slds-dropdown__list')]//span[text()='Edit']")).click();
 		
-		driver.switchTo().frame(driver.findElement(By.xpath("(//div[@class='dashboardContainer'])[2]/iframe")));
-
+		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='dashboardContainer']/iframe")));
+		
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//span[text()='Edit Dashboard Properties']/parent::button")).click();
 	
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//input[@id='dashboardNameInput']")).clear();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//input[@id='dashboardNameInput']")).sendKeys("Salesforce");
-		driver.findElement(By.xpath("//button[@id='submitBtn']")).click();
+		driver.findElement(By.xpath("//button[@id='submitBtn']")).click();	
 		driver.findElement(By.xpath("//button[text()='Done']")).click();
 		driver.findElement(By.xpath("//footer/button[text()='Save']")).click();
 
